@@ -77,3 +77,7 @@ shaderSource Shader::parseShader(const std::string &filePath){
     return {ss[0].str(), ss[1].str()};
 }
 
+void Shader::use(void){
+    glUseProgram(this->ID);
+};
+

@@ -12,12 +12,12 @@ class Shader{
     public:
         int ID;
         Shader(const std::string &filepath);
+        void use(void);
     private:
         shaderSource parseShader(const std::string &filePath);
         unsigned int compileShader(const std::string &source, unsigned int type); 
         
+        
 };
-
-
 
 #endif
