@@ -1,8 +1,14 @@
 #define GL_SILENCE_DEPRECATION
-#include "window.h"
+
 #include <iostream>
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+
+
+#include "window.h"
+#include "../../libraries/imgui/imgui.h"
+#include "../../libraries/imgui/imgui_impl_glfw.h"
+#include "../../libraries/imgui/imgui_impl_opengl3.h"
 
 Window::Window(int width, int height, std::string title){
     this->width = width;
@@ -34,6 +40,16 @@ void Window::init(void){
         std::cerr << "ERROR INITIALIZING GLEW" << std::endl;
         exit(EXIT_FAILURE);
     }
+
+     /* IMGUI INIT */
+    IMGUI_CHECKVERSION();
+    ImGui::CreateContext();
+    ImGuiIO& io = ImGui::GetIO(); (void)io; //sets up input / output
+
+    ImGui::StyleColorsDark();
+
+    ImGui_ImplGlfw_InitForOpenGL(win, true);
+    ImGui_ImplOpenGL3_Init("#version 150");
     
 };
 
