@@ -4,7 +4,6 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
-
 #include "window.h"
 #include "../../libraries/imgui/imgui.h"
 #include "../../libraries/imgui/imgui_impl_glfw.h"
@@ -79,6 +78,15 @@ void Window::swapBuffers(void){
 
 void Window::pollEvents(void){
     glfwPollEvents();
+};
+
+void Window::quit(void){
+    glfwDestroyWindow(win);
+    glfwTerminate();
+};
+
+void Window::enable3d(void){
+    glEnable(GL_DEPTH_TEST);
 }
 
 

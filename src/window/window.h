@@ -26,7 +26,7 @@ class Window{
         void clearBuffers(void);
         void swapBuffers(void);
         void pollEvents(void);
-
-    
+        void quit(void);
+        void enable3d(void);
 };
 #endif
