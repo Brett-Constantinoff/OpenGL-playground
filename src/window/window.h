@@ -1,5 +1,6 @@
 #ifndef WINDOW_H
 #define WINDOW_H
+#define GL_SILENCE_DEPRECATION
 
 #include <string>
 #include <GL/glew.h>

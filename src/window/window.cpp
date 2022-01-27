@@ -1,3 +1,4 @@
+#define GL_SILENCE_DEPRECATION
 #include "window.h"
 #include <iostream>
 #include <GL/glew.h>
