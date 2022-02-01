@@ -14,9 +14,10 @@ void VertexBuffer::bind(void){
 void VertexBuffer::setData(std::size_t size, std::vector<float> data){
     float positions[size];
     std::copy(data.begin(), data.end(), positions);
-    glBufferData(GL_ARRAY_BUFFER, size, positions, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(positions), positions, GL_STATIC_DRAW);
 };
 
 void VertexBuffer::setAttribPointer(unsigned int index, int size, int type, bool normalized, int stride, const void* offset){
     glVertexAttribPointer(index, size, type, normalized, stride, offset);
 };
+
