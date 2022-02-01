@@ -2,6 +2,9 @@
 #define SHADER_H
 
 #include <string>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 struct shaderSource{
     std::string vertexSource;
@@ -13,11 +16,10 @@ class Shader{
         int ID;
         Shader(const std::string &filepath);
         void use(void);
+        void setMat4(const std::string &name, const glm::mat4 &matrix);
     private:
         shaderSource parseShader(const std::string &filePath);
         unsigned int compileShader(const std::string &source, unsigned int type); 
-        
-        
 };
 
 #endif

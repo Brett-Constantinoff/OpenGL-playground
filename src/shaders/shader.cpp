@@ -5,6 +5,9 @@
 #include <fstream>
 #include <string>
 #include <sstream>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 
 Shader::Shader(const std::string &filepath){
@@ -79,5 +82,9 @@ shaderSource Shader::parseShader(const std::string &filePath){
 
 void Shader::use(void){
     glUseProgram(this->ID);
+};
+
+void Shader::setMat4(const std::string &name, const glm::mat4 &matrix){
+    glUniformMatrix4fv(glGetUniformLocation(this->ID, name.c_str()), 1, GL_FALSE, &matrix[0][0]);
 };
 
