@@ -8,7 +8,7 @@
 
 int main(){
     
-   Window window(800, 600, "Hello World");
+   Window window(800, 600, "Playground");
    window.setViewPort(0, 0);
    window.enable3d();
 
