@@ -19,7 +19,8 @@ class Window{
     public:
         GLFWwindow* win;
         Window(int width, int height, std::string title);
-        void init(void);
+        int getWidth(void);
+        int getHeight(void);
         void setViewPort(int x, int y);
         bool isOpen(void);
         void clearColor(float r, float g, float b, float alpha);

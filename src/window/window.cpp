@@ -13,10 +13,8 @@ Window::Window(int width, int height, std::string title){
     this->width = width;
     this->height = height;
     this->title = title.c_str(); 
-};
 
-void Window::init(void){
-    /* INIT GLFW */
+        /* INIT GLFW */
     glfwInit();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
@@ -49,7 +47,14 @@ void Window::init(void){
 
     ImGui_ImplGlfw_InitForOpenGL(win, true);
     ImGui_ImplOpenGL3_Init("#version 150");
-    
+};
+
+int Window::getHeight(void){
+    return this->height;
+};
+
+int Window::getWidth(void){
+    return this->width;
 };
 
 void Window::makeCurrentContext(void){
@@ -87,6 +92,7 @@ void Window::quit(void){
 
 void Window::enable3d(void){
     glEnable(GL_DEPTH_TEST);
+    glDepthFunc(GL_LESS);
 }
 
 
