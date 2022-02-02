@@ -27,8 +27,10 @@ class Cube{
         glm::vec3 color;
         std::string name;
         glm::mat4 model;
+        glm::mat4 normalMat;
         void draw(void);
         void move(float x, float y, float z);
+        void updateNormalMat(void);
         void translate(glm::vec3 vec);
 
        

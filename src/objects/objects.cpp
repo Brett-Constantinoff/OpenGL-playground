@@ -146,6 +146,11 @@ void Cube::move(float x, float y, float z){
     this->model = glm::translate(this->model, glm::vec3(x, y, z));
 };
 
+void Cube::updateNormalMat(void){
+    this->normalMat = glm::transpose(this->model);
+    this->normalMat = glm::inverse(this->normalMat);
+};
+
 void Cube::genVertexArray(void){
     glGenVertexArrays(1, &this->vao);
 };

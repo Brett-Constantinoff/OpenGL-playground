@@ -5,7 +5,7 @@
 #include "scene/scene.h"
 #include <random>
 #include <iostream>
-#define CUBES 5
+#define CUBES 10
 
 
 int main(){
@@ -23,13 +23,19 @@ int main(){
    }
    
    Camera camera(glm::vec3(0.0f, 0.0f ,3.0f), glm::vec3(0.0f, 0.0f, -2.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+   glm::vec3 ambient = glm::vec3(0.1f, 0.1f, 0.1f);
+   glm::vec3 specular = glm::vec3(1.0f, 1.0f, 1.0f);
+   glm::vec3 lightColor = glm::vec3(1.0f, 1.0f, 1.0f);
+   const float lightStr = 2.0f;
+   const float n = 2.0f;
    
    while(window.isOpen()){
        glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f);
        camera.move(&window.win);
+       glm::vec3 lightPosition = camera.position;
        scene.setView(&window, &camera);
 
-       window.clearColor(1.0f, 0.0f, 1.0f, 1.0f);
+       window.clearColor(0.1f, 0.1f, 0.1f, 1.0f);
        window.clearBuffers();
 
        window.enableGui();
@@ -37,14 +43,23 @@ int main(){
        window.stopGuiElement();
 
        shader.use();
+       shader.setFloat("lightStr", lightStr);
+       shader.setFloat("n", n);
+       shader.setVec3("cameraPosition", camera.position);
+       shader.setVec3("ambientVal", ambient);
+       shader.setVec3("specularVal", specular);
+       shader.setVec3("lightCol", lightColor);
+       shader.setVec3("lightPos", lightPosition);
        shader.setMat4("projection", scene.projection);
        shader.setMat4("view", scene.view);
-       
+    
        for (int i = 0; i < CUBES; i++){
            for(Cube c : scene.getObjects()){
                c.move(position.x, position.y, position.z);
-               shader.setVec3("color", c.color);
+               c.updateNormalMat();
+               shader.setVec3("diffuseVal", c.color);
                shader.setMat4("model", c.model);
+               shader.setMat4("normalMatrix", c.normalMat);
                c.draw();
                position.x += 1.0f;
            }
