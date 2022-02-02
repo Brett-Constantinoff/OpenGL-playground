@@ -14,7 +14,7 @@ Window::Window(int width, int height, std::string title){
     this->height = height;
     this->title = title.c_str(); 
 
-        /* INIT GLFW */
+    /* INIT GLFW */
     glfwInit();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
@@ -24,12 +24,13 @@ Window::Window(int width, int height, std::string title){
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 #endif
 
-    this->win = glfwCreateWindow(this->width, this->height, "Hello World", NULL, NULL);
+    this->win = glfwCreateWindow(this->width, this->height, this->title, NULL, NULL);
     if(!this->win){
         std::cerr << "Error creating OpenGL window" << std::endl;
         exit(EXIT_FAILURE);
     }
     this->makeCurrentContext();
+    this->setViewPort(0, 0);
 
     /* GLEW INIT */
     glewExperimental = true;
@@ -42,10 +43,8 @@ Window::Window(int width, int height, std::string title){
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
     ImGuiIO& io = ImGui::GetIO(); (void)io; //sets up input / output
-
     ImGui::StyleColorsDark();
-
-    ImGui_ImplGlfw_InitForOpenGL(win, true);
+    ImGui_ImplGlfw_InitForOpenGL(this->win, true);
     ImGui_ImplOpenGL3_Init("#version 150");
 };
 
@@ -78,7 +77,7 @@ void Window::clearBuffers(void){
 }
 
 void Window::swapBuffers(void){
-    glfwSwapBuffers(win);
+    glfwSwapBuffers(this->win);
 };
 
 void Window::pollEvents(void){
@@ -86,13 +85,41 @@ void Window::pollEvents(void){
 };
 
 void Window::quit(void){
-    glfwDestroyWindow(win);
+    glfwDestroyWindow(this->win);
     glfwTerminate();
 };
 
 void Window::enable3d(void){
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LESS);
-}
+};
+
+void Window::enableGui(void){
+    //setup imgui frame
+    ImGui_ImplOpenGL3_NewFrame();
+    ImGui_ImplGlfw_NewFrame();
+    ImGui::NewFrame();
+};
+
+void Window::renderGui(void){
+    ImGui::Render();
+    ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+};
+
+void Window::quitGui(void){
+    ImGui_ImplOpenGL3_Shutdown();
+    ImGui_ImplGlfw_Shutdown();
+    ImGui::DestroyContext();
+};
+
+void Window::startGuiElement(std::string name){
+    ImGui::Begin("Hello, world!");     
+};
+
+void Window::stopGuiElement(void){
+    ImGui::End();
+};
+
+
 
 

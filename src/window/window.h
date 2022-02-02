@@ -29,5 +29,11 @@ class Window{
         void pollEvents(void);
         void quit(void);
         void enable3d(void);
+        void enableGui(void);
+        void renderGui(void);
+        void quitGui(void);
+        void startGuiElement(std::string name);
+        void stopGuiElement(void);
+        void setGuiFloat3(float a, float b, float c);
 };
 #endif
