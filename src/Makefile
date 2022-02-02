@@ -1,7 +1,7 @@
 all: main
 
-main: main.o shader.o scene.o window.o objects.o camera.o vertexArrayObject.o vertexBuffer.o imgui.o 
-	g++ main.o shader.o scene.o window.o objects.o camera.o vertexArrayObject.o vertexBuffer.o imgui_demo.o imgui_draw.o imgui_impl_glfw.o imgui_impl_opengl3.o imgui_tables.o imgui_widgets.o imgui.o -std=c++11 -o main -lglfw -lglew -framework OpenGL
+main: main.o shader.o scene.o window.o objects.o camera.o imgui.o 
+	g++ main.o shader.o scene.o window.o objects.o camera.o imgui_demo.o imgui_draw.o imgui_impl_glfw.o imgui_impl_opengl3.o imgui_tables.o imgui_widgets.o imgui.o -std=c++11 -o main -lglfw -lglew -framework OpenGL
 
 main.o: main.cpp
 	g++ main.cpp -std=c++11 -c
@@ -11,12 +11,6 @@ camera.o: camera/camera.cpp
 
 objects.o: objects/objects.cpp objects/objects.h
 	g++ objects/objects.cpp -std=c++11 -c
-
-vertexArrayObject.o: buffers/vertexArrayObject.cpp buffers/vertexArrayObject.h
-	g++ buffers/vertexArrayObject.cpp -std=c++11 -c
-
-vertexBuffer.o: buffers/vertexBuffer.cpp buffers/vertexBuffer.h
-	g++ buffers/vertexBuffer.cpp -std=c++11 -c
 
 window.o: window/window.cpp window/window.h
 	g++ window/window.cpp -std=c++11 -c

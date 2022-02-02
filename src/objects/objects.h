@@ -6,26 +6,22 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
-#include "../buffers/vertexArrayObject.h"
-#include "../buffers/vertexBuffer.h"
+
 
 class Cube{
     private:
         std::vector<float> vertexPositions;
-        VertexArrayObject vao;
-        VertexBuffer vertexBuffer;
-        VertexBuffer colorBuffer;
+        std::vector<float> vertexNormals;
+        unsigned int vao;
+        unsigned int vertexPosBuffer;
+        unsigned int vertexNormBuffer;
         void genVertexArray(void);
         void bindVertexArray(void);
-        void genVertexBuffer(void);
-        void genColorBuffer(void);
-        void bindVertexBuffer(void);
-        void bindColorBuffer(void);
-        void setVertexBufferData(size_t size, std::vector<float> data);
-        void setColorBufferData(size_t size, std::vector<float> data); 
-        void setVertexAttribPointer(unsigned int index, int size, int type, bool normalized, int stride, const void* offset);
-        void setColorAttribPointer(unsigned int index, int size, int type, bool normalized, int stride, const void* offset);
-        void enableVertexAttrib(unsigned int i);
+        void genBuffer(unsigned int* buffer);
+        void bindBuffer(unsigned int buffer);
+        void setBufferData(size_t size, std::vector<float> data);
+        void setAttribPointer(unsigned int index, int size, int type, bool normalized, int stride, const void* offset);
+        void enableAttribPointer(unsigned int i);
     public:
         Cube(std::string name, glm::vec3 color);
         glm::vec3 color;
