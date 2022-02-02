@@ -5,8 +5,9 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-Cube::Cube(std::string name){
+Cube::Cube(std::string name, glm::vec3 color){
     this->name = name;
+    this->color = color;
     this->vertexPositions = {
          //front face
         0.5f, 0.5f, 0.5f, 

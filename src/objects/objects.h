@@ -27,7 +27,8 @@ class Cube{
         void setColorAttribPointer(unsigned int index, int size, int type, bool normalized, int stride, const void* offset);
         void enableVertexAttrib(unsigned int i);
     public:
-        Cube(std::string name);
+        Cube(std::string name, glm::vec3 color);
+        glm::vec3 color;
         std::string name;
         glm::mat4 model;
         void draw(void);
