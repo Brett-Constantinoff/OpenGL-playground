@@ -19,6 +19,7 @@ class Shader{
         void setMat4(const std::string &name, const glm::mat4 &matrix);
         void setVec3(const std::string &name, const glm::vec3 &color);
         void setFloat(const std::string &name, const float value);
+        void setInt(const std::string &name, const int value);
     private:
         shaderSource parseShader(const std::string &filePath);
         unsigned int compileShader(const std::string &source, unsigned int type); 

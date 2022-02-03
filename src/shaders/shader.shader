@@ -2,6 +2,7 @@
 #version 330 core
 layout (location = 0) in vec3 aPos;
 layout (location = 1) in vec3 aNorm;
+layout (location = 2) in vec2 aUv;
 
 uniform mat4 projection;
 uniform mat4 view;
@@ -12,6 +13,7 @@ uniform vec3 cameraPosition;
 out vec3 oNormal;
 out vec3 oCameraPosition;
 out vec3 oFragPosition;
+out vec2 oUv;
 
 void main()
 {
@@ -19,6 +21,7 @@ void main()
    oFragPosition = (model * vec4(aPos, 0.0)).xyz;
    oNormal = (normalMatrix * vec4(aNorm, 0.0)).xyz;
    oCameraPosition = cameraPosition;
+   oUv = aUv;
 }
 
 #shader fragmentShader
@@ -31,15 +34,19 @@ uniform float lightStr;
 uniform float n;
 uniform vec3 lightCol;
 uniform vec3 lightPos;
+uniform sampler2D myTexture;
 
 in vec3 oNormal;
 in vec3 oCameraPosition;
 in vec3 oFragPosition;
+in vec2 oUv;
 
 out vec4 colour;
 
 void main()
-{
+{  
+   vec4 textureCol = texture(myTexture, oUv);
+
    vec3 normal = normalize(oNormal);
    vec3 lightDir = normalize(lightPos - oFragPosition);
    vec3 viewDir = normalize(oCameraPosition - oFragPosition);
@@ -52,5 +59,5 @@ void main()
    float spec = max(dot(halfVec, normal), 0.0);
    vec3 specular = specularVal * lightCol * pow(spec, n);
 
-   colour = vec4(diffuse + ambient + specular,  1.0);
+   colour = vec4(diffuse + ambient + specular,  1.0) * textureCol;
 }
