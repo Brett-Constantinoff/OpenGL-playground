@@ -18,7 +18,7 @@ int main(){
     
    for(int i = 0; i < CUBES; i++){
        glm::vec3 color = glm::vec3(((float)rand() / RAND_MAX), ((float)rand() / RAND_MAX), ((float)rand() / RAND_MAX));
-       Cube cube("cube" + std::to_string(i), color);
+       Cube cube("cube" + std::to_string(i), color, "../res/brick.jpeg");
        scene.add(cube);
    }
    
@@ -26,20 +26,27 @@ int main(){
    glm::vec3 ambient = glm::vec3(0.1f, 0.1f, 0.1f);
    glm::vec3 specular = glm::vec3(1.0f, 1.0f, 1.0f);
    glm::vec3 lightColor = glm::vec3(1.0f, 1.0f, 1.0f);
+   glm::vec3 lightPosition = glm::vec3(0.0f, 5.0f, 0.0f);
+   glm::vec3 backgroundCol = glm::vec3(0.1f, 0.1f, 0.1f);
    const float lightStr = 2.0f;
    const float n = 2.0f;
    
    while(window.isOpen()){
        glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f);
+       
        camera.move(&window.win);
-       glm::vec3 lightPosition = camera.position;
        scene.setView(&window, &camera);
-
-       window.clearColor(0.1f, 0.1f, 0.1f, 1.0f);
+       window.clearColor(backgroundCol.r, backgroundCol.g, backgroundCol.b, 1.0f);
        window.clearBuffers();
-
+       
+       //starts gui frame, all gui calls need to happen after this and before the end call
        window.enableGui();
-       window.startGuiElement("Hello world");
+       //main demo window, each gui window can(not neccessary) hav its own scope
+       {
+        window.startGuiElement("Main Window");
+        window.setGuiColor("BackGround Color", &backgroundCol);
+       }
+       //stops gui frame
        window.stopGuiElement();
 
        shader.use();
@@ -70,6 +77,7 @@ int main(){
        window.swapBuffers();
        window.pollEvents();
    }
+   scene.deleteScene();
    window.quitGui();
    window.quit();
 }
