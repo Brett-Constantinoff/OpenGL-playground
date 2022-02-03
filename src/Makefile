@@ -1,30 +1,41 @@
+CC=g++
+CFLAGS=-std=c++11 -c
+LDFLAGS=-lglfw -lglew -framework OpenGL
+
 all: main
 
 main: main.o shader.o scene.o window.o objects.o camera.o imgui.o stb_image.o
-	g++ main.o shader.o scene.o window.o objects.o camera.o imgui_demo.o imgui_draw.o imgui_impl_glfw.o imgui_impl_opengl3.o imgui_tables.o imgui_widgets.o imgui.o stb_image.o -std=c++11 -o main -lglfw -lglew -framework OpenGL
+	$(CC) main.o shader.o scene.o window.o objects.o camera.o imgui_demo.o imgui_draw.o imgui_impl_glfw.o imgui_impl_opengl3.o imgui_tables.o imgui_widgets.o imgui.o stb_image.o -std=c++11 -o main -lglfw -lglew -framework OpenGL
 
-main.o: main.cpp
-	g++ main.cpp -std=c++11 -c
+main.o: *.cpp
+	$(CC) *.cpp $(CFLAGS)
 
-camera.o: camera/camera.cpp
-	g++ camera/camera.cpp -std=c++11 -c
+camera.o: camera/*.cpp camera/*.h
+	$(CC) camera/camera.cpp $(CFLAGS)
 
-objects.o: objects/objects.cpp objects/objects.h
-	g++ objects/objects.cpp -std=c++11 -c
 
-window.o: window/window.cpp window/window.h
-	g++ window/window.cpp -std=c++11 -c
+objects.o: objects/*.cpp objects/*.h
+	$(CC) objects/*.cpp $(CFLAGS)
 
-shader.o: shaders/shader.cpp shaders/shader.h
-	g++ shaders/shader.cpp -std=c++11 -c
 
-scene.o: scene/scene.cpp scene/scene.h
-	g++ scene/scene.cpp -std=c++11 -c
+window.o: window/*.cpp window/*.h
+	$(CC) window/*.cpp $(CFLAGS)
+
+
+shader.o: shaders/*.cpp shaders/*.h
+	$(CC) shaders/*.cpp $(CFLAGS)
+
+
+scene.o: scene/*.cpp scene/*.h
+	$(CC) scene/*.cpp $(CFLAGS)
 
 imgui.o: ../libraries/imgui/imgui.cpp ../libraries/imgui/imgui_demo.cpp ../libraries/imgui/imgui_draw.cpp ../libraries/imgui/imgui_tables.cpp ../libraries/imgui/imgui_widgets.cpp ../libraries/imgui/imgui_impl_glfw.cpp ../libraries/imgui/imgui_impl_opengl3.cpp
-	g++ ../libraries/imgui/imgui.cpp ../libraries/imgui/imgui_demo.cpp ../libraries/imgui/imgui_draw.cpp ../libraries/imgui/imgui_tables.cpp ../libraries/imgui/imgui_widgets.cpp ../libraries/imgui/imgui_impl_glfw.cpp ../libraries/imgui/imgui_impl_opengl3.cpp ../libraries/imgui/imgui_impl_opengl3.cpp -std=c++11 -c
+	$(CC) ../libraries/imgui/imgui.cpp ../libraries/imgui/imgui_demo.cpp ../libraries/imgui/imgui_draw.cpp ../libraries/imgui/imgui_tables.cpp ../libraries/imgui/imgui_widgets.cpp ../libraries/imgui/imgui_impl_glfw.cpp ../libraries/imgui/imgui_impl_opengl3.cpp ../libraries/imgui/imgui_impl_opengl3.cpp $(CFLAGS)
 
-stb_image.o: ../libraries/imageLoading/stb_image.cpp ../libraries/imageLoading/stb_image.h
-	g++ ../libraries/imageLoading/stb_image.cpp -std=c++11 -c
+stb_image.o: ../libraries/imageLoading/*.cpp
+	$(CC) ../libraries/imageLoading/*.cpp $(CFLAGS)
+
 clean: 
-	rm -f *.o 
+	$(RM) *.o 
+	$(RM) main
+	$(RM) imgui.ini
