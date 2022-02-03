@@ -19,6 +19,7 @@ class Scene{
         glm::mat4 view;
         void add(Cube c);
         void setView(Window *win, Camera *cam);
+        void deleteScene(void);
         std::vector<Cube> getObjects(void);
 
 };
