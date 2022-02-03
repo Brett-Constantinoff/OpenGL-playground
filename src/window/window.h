@@ -34,6 +34,7 @@ class Window{
         void quitGui(void);
         void startGuiElement(std::string name);
         void stopGuiElement(void);
-        void setGuiFloat3(float a, float b, float c);
+        void setGuiFloat3(const char* title, glm::vec3 value, float min, float max);
+        void setGuiColor(const char* title, glm::vec3* color);
 };
 #endif

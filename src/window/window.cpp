@@ -61,7 +61,7 @@ void Window::makeCurrentContext(void){
 };
 
 void Window::setViewPort(int x, int y){
-    glViewport(0, 0, this->width, this->height);
+    glViewport(0, 0, this->height, this->width);
 };
 
 bool Window::isOpen(void){
@@ -118,6 +118,14 @@ void Window::startGuiElement(std::string name){
 
 void Window::stopGuiElement(void){
     ImGui::End();
+};
+
+void Window::setGuiFloat3(const char* title, glm::vec3 value, float min, float max){
+    ImGui::SliderFloat3(title, &value.x, min, max);
+};
+
+void Window::setGuiColor(const char* title, glm::vec3* color){
+    ImGui::ColorEdit3(title, (float*)color);
 };
 
 
