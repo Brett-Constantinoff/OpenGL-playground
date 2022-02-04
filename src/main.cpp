@@ -41,10 +41,11 @@ int main(){
        
        //starts gui frame, all gui calls need to happen after this and before the end call
        window.enableGui();
-       //main demo window, each gui window can(not neccessary) hav its own scope
+       //main demo window, each gui window can(not neccessary) have its own scope
        {
         window.startGuiElement("Main Window");
         window.setGuiColor("BackGround Color", &backgroundCol);
+        window.displayGuiFloat3("Camera Position", camera.position.x, camera.position.y, camera.position.z);
        }
        //stops gui frame
        window.stopGuiElement();
@@ -68,9 +69,9 @@ int main(){
                shader.setMat4("model", c.model);
                shader.setMat4("normalMatrix", c.normalMat);
                c.draw();
-               position.x += 1.0f;
+               position.x += 2.0f;
            }
-           position.z += 1.0f;
+           position.z += 2.0f;
            position.x = 0.0f;
        }
        window.renderGui();
