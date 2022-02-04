@@ -113,7 +113,7 @@ void Window::quitGui(void){
 };
 
 void Window::startGuiElement(std::string name){
-    ImGui::Begin("Hello, world!");     
+    ImGui::Begin(name.c_str());     
 };
 
 void Window::stopGuiElement(void){
@@ -126,6 +126,10 @@ void Window::setGuiFloat3(const char* title, glm::vec3 value, float min, float m
 
 void Window::setGuiColor(const char* title, glm::vec3* color){
     ImGui::ColorEdit3(title, (float*)color);
+};
+
+void Window::displayGuiFloat3(const char* title, float x, float y, float z){
+    ImGui::Text("%s: %.3f %.3f %.3f", title, x, y, z);
 };
 
 
