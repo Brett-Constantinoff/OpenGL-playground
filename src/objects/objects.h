@@ -11,14 +11,18 @@
 class Cube{
     private:
         std::vector<float> vertexPositions;
+        std::vector<int> triangles;
         unsigned int vao;
         unsigned int vertexPosBuffer;
         unsigned int textBuffer;
+        unsigned int indexBuffer;
         void genVertexArray(void);
         void bindVertexArray(void);
         void genBuffer(unsigned int* buffer);
+        void bindIndexBuffer(unsigned int buffer);
         void bindBuffer(unsigned int buffer);
         void setBufferData(size_t size, std::vector<float> data);
+        void setIndexBufferData(size_t, std::vector<int> data);
         void setAttribPointer(unsigned int index, int size, int type, bool normalized, int stride, const void* offset);
         void enableAttribPointer(unsigned int i);
         void setTexture(void);

@@ -12,53 +12,49 @@ Cube::Cube(std::string name, glm::vec3 color, const char* texture){
     this->color = color;
     this->texture = texture;
     this->vertexPositions = {
-         //front face
-        0.5f, 0.5f, 0.5f,  0.0f, 0.0f, 1.0f,  1.0f, 1.0f,
-        0.0f, 0.5f, 0.5f,  0.0f, 0.0f, 1.0f,  1.0f, 0.0f, 
-        0.0f, 0.0f, 0.5f,  0.0f, 0.0f, 1.0f,  0.0f, 0.0f, 
-        0.0f, 0.0f, 0.5f,  0.0f, 0.0f, 1.0f,  0.0f, 0.0f,
-        0.5f, 0.0f, 0.5f,  0.0f, 0.0f, 1.0f,  0.0f, 1.0f,
-        0.5f, 0.5f, 0.5f,  0.0f, 0.0f, 1.0f,  1.0f, 1.0f,
+       //front face
+       0.0f, 0.0f, 0.0f,    0.0f, 0.0f, 1.0f,   0.0f,  0.0f,    //0
+       1.0f, 0.0f, 0.0f,    0.0f, 0.0f, 1.0f,   1.0f,  0.0f,    //1
+       1.0f, 1.0f, 0.0f,    0.0f, 0.0f, 1.0f,   1.0f,  1.0f,    //2
+       0.0f, 1.0f, 0.0f,    0.0f, 0.0f, 1.0f,   0.0f,  1.0f,    //3
 
-        //right face
-        0.5f, 0.5f, 0.0f,  1.0f, 0.0f, 0.0f,  1.0f, 1.0f,
-        0.5f, 0.5f, 0.5f,  1.0f, 0.0f, 0.0f,  1.0f, 0.0f,
-        0.5f, 0.0f, 0.5f,  1.0f, 0.0f, 0.0f,  0.0f, 0.0f,
-        0.5f, 0.0f, 0.5f,  1.0f, 0.0f, 0.0f,  0.0f, 0.0f,
-        0.5f, 0.0f, 0.0f,  1.0f, 0.0f, 0.0f,  0.0f, 1.0f,
-        0.5f, 0.5f, 0.0f,  1.0f, 0.0f, 0.0f,  1.0f, 1.0f,
+       //right face
+       1.0f, 0.0f, 0.0f,    1.0f, 0.0f, 0.0f,   0.0f, 0.0f,     //4
+       1.0f, 0.0f, 1.0f,    1.0f, 0.0f, 0.0f,   1.0f, 0.0f,     //5
+       1.0f, 1.0f, 1.0f,    1.0f, 0.0f, 0.0f,   1.0f, 1.0f,     //6
+       1.0f, 1.0f, 0.0f,    1.0f, 0.0f, 0.0f,   0.0f, 1.0f,     //7
 
-        //left face
-        0.0f, 0.5f, 0.5f,  -1.0f, 0.0f, 0.0f, 1.0f, 1.0f,
-        0.0f, 0.0f, 0.0f,  -1.0f, 0.0f, 0.0f, 1.0f, 0.0f,
-        0.0f, 0.0f, 0.5f,  -1.0f, 0.0f, 0.0f, 0.0f, 0.0f,
-        0.0f, 0.5f, 0.5f,  -1.0f, 0.0f, 0.0f, 0.0f, 0.0f,
-        0.0f, 0.5f, 0.0f,  -1.0f, 0.0f, 0.0f, 0.0f, 1.0f,
-        0.0f, 0.0f, 0.0f,  -1.0f, 0.0f, 0.0f, 1.0f, 1.0f,
+       //back face
+       0.0f, 0.0f, 1.0f,    0.0f, 0.0f, -1.0f,  0.0f, 0.0f,     //8
+       0.0f, 1.0f, 1.0f,    0.0f, 0.0f, -1.0f,  1.0f, 0.0f,     //9
+       1.0f, 1.0f, 1.0f,    0.0f, 0.0f, -1.0f,  1.0f, 1.0f,     //10
+       1.0f, 0.0f, 1.0f,    0.0f, 0.0f, -1.0f,  0.0f, 1.0f,     //11
 
-        //back face
-        0.5f, 0.0f, 0.0f,  0.0f, 0.0f, -1.0f, 1.0f, 1.0f,
-        0.0f, 0.0f, 0.0f,  0.0f, 0.0f, -1.0f, 1.0f, 0.0f,
-        0.0f, 0.5f, 0.0f,  0.0f, 0.0f, -1.0f, 0.0f, 0.0f,
-        0.0f, 0.5f, 0.0f,  0.0f, 0.0f, -1.0f, 0.0f, 0.0f,
-        0.5f, 0.5f, 0.0f,  0.0f, 0.0f, -1.0f, 0.0f, 1.0f,
-        0.5f, 0.0f, 0.0f,  0.0f, 0.0f, -1.0f, 1.0f, 1.0f,
+       //left face
+       0.0f, 0.0f, 0.0f,    -1.0f, 0.0f, 0.0f,  0.0f, 0.0f,     //12
+       0.0f, 1.0f, 0.0f,    -1.0f, 0.0f, 0.0f,  1.0f, 0.0f,     //13
+       0.0f, 1.0f, 1.0f,    -1.0f, 0.0f, 0.0f,  1.0f, 1.0f,     //14
+       0.0f, 0.0f, 1.0f,    -1.0f, 0.0f, 0.0f,  0.0f, 1.0f,     //15
 
-        //top face
-        0.5f, 0.5f, 0.5f,  0.0f, 1.0f, 0.0f,  1.0f, 1.0f,
-        0.5f, 0.5f, 0.0f,  0.0f, 1.0f, 0.0f,  1.0f, 0.0f,
-        0.0f, 0.5f, 0.0f,  0.0f, 1.0f, 0.0f,  0.0f, 0.0f,
-        0.0f, 0.5f, 0.0f,  0.0f, 1.0f, 0.0f,  0.0f, 0.0f,
-        0.0f, 0.5f, 0.5f,  0.0f, 1.0f, 0.0f,  0.0f, 1.0f,
-        0.5f, 0.5f, 0.5f,  0.0f, 1.0f, 0.0f,  1.0f, 1.0f,
+       //top face
+       0.0f, 1.0f, 0.0f,     0.0f, 1.0f, 0.0f,  0.0f, 0.0f,     //16
+       1.0f, 1.0f, 0.0f,     0.0f, 1.0f, 0.0f,  1.0f, 0.0f,     //17
+       0.0f, 1.0f, 1.0f,     0.0f, 1.0f, 0.0f,  1.0f, 1.0f,     //18
+       1.0f, 1.0f, 1.0f,     0.0f, 1.0f, 0.0f,  0.0f, 1.0f,     //19
 
-        //bottom face
-        0.0f, 0.0f, 0.5f,  0.0f, -1.0f, 0.0f, 1.0f, 1.0f,
-        0.0f, 0.0f, 0.0f,  0.0f, -1.0f, 0.0f, 1.0f, 0.0f,
-        0.5f, 0.0f, 0.0f,  0.0f, -1.0f, 0.0f, 0.0f, 0.0f,
-        0.0f, 0.0f, 0.5f,  0.0f, -1.0f, 0.0f, 0.0f, 0.0f,
-        0.5f, 0.0f, 0.0f,  0.0f, -1.0f, 0.0f, 0.0f, 1.0f,
-        0.5f, 0.0f, 0.5f,  0.0f, -1.0f, 0.0f, 1.0f, 1.0f,
+       //bottom face
+       0.0f, 0.0f, 1.0f,     0.0f, -1.0f, 0.0f, 0.0f, 0.0f,     //20
+       0.0f, 1.0f, 1.0f,     0.0f, -1.0f, 0.0f, 1.0f, 0.0f,     //21
+       1.0f, 1.0f, 1.0f,     0.0f, -1.0f, 0.0f, 1.0f, 1.0f,     //22
+       1.0f, 0.0f, 1.0f,     0.0f, -1.0f, 0.0f, 0.0f, 1.0f      //23
+    };
+    this->triangles = {
+        0,  1,  2,      0,  2,  3,
+        4,  5,  6,      4,  6,  7,   
+        8,  9,  10,     8,  10, 11,  
+        12, 13, 14,     12, 14, 15, 
+        16, 17, 18,     17, 18, 19,  
+        20, 21, 22,     21, 22, 23
     };
 
     this->model = glm::mat4(1.0f);
@@ -66,10 +62,15 @@ Cube::Cube(std::string name, glm::vec3 color, const char* texture){
     this->genVertexArray();
     this->bindVertexArray();
 
-    //set buffer
+    //set buffers
     this->genBuffer(&this->vertexPosBuffer);
     this->bindBuffer(this->vertexPosBuffer);
     this->setBufferData(this->vertexPositions.size(), this->vertexPositions);
+    
+    this->genBuffer(&this->indexBuffer);
+    this->bindIndexBuffer(this->indexBuffer);
+    this->setIndexBufferData(this->triangles.size(), this->triangles);
+
     this->setTexture();
 
     //set vertex positions
@@ -89,7 +90,8 @@ void Cube::draw(void){
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, this->textBuffer);
     this->bindVertexArray();
-    glDrawArrays(GL_TRIANGLES, 0, this->vertexPositions.size());  
+    //glDrawArrays(GL_TRIANGLES, 0, this->vertexPositions.size());  
+    glDrawElements(GL_TRIANGLES, this->triangles.size(), GL_UNSIGNED_INT, 0);
 };
 
 void Cube::move(float x, float y, float z){
@@ -117,10 +119,20 @@ void Cube::bindBuffer(unsigned int buffer){
     glBindBuffer(GL_ARRAY_BUFFER, buffer);
 };
 
+void Cube::bindIndexBuffer(unsigned int buffer){
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffer);
+};
+
 void Cube::setBufferData(size_t size, std::vector<float> data){
     float positions[size];
     std::copy(data.begin(), data.end(), positions);
     glBufferData(GL_ARRAY_BUFFER, sizeof(positions), positions, GL_STATIC_DRAW);
+};
+
+void Cube::setIndexBufferData(size_t size, std::vector<int> data){
+    int indices[size];
+    std::copy(data.begin(), data.end(), indices);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 };
 
 void Cube::setAttribPointer(unsigned int index, int size, int type, bool normalized, int stride, const void* offset){
@@ -136,7 +148,7 @@ void Cube::setTexture(void){
     glBindTexture(GL_TEXTURE_2D, this->textBuffer);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
     int width, height, nrChannels;
