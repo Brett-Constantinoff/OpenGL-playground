@@ -9,6 +9,27 @@
 
 #include "SceneObject.h"
 
+class Light{
+    
+    public:
+        glm::vec3 color;
+        glm::vec3 ambient;
+        glm::vec3 diffuse;
+        glm::vec3 specular;
+        glm::vec3 position;
+        float strength;
+        float n;
+        Light(glm::vec3 color, glm::vec3 ambient, glm::vec3 diffuse, glm::vec3 specular, glm::vec3 position, float strength, float n){
+            this->color = color;
+            this->ambient = ambient;
+            this->diffuse = diffuse;
+            this->specular = specular;
+            this->position = position;
+            this->strength = strength;
+            this->n = n;
+        };
+};
+
 
 class Cube : public SceneObject{
     public:

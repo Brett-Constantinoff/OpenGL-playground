@@ -15,7 +15,7 @@ class SceneObject{
         glm::vec3 color;
         std::string name;
         const char* texture;
-        glm::mat4 model;
+        glm::mat4 model = glm::mat4(1.0f);
         glm::mat4 normalMat;
         void draw(void);
         void move(float x, float y, float z);
@@ -30,6 +30,7 @@ class SceneObject{
         unsigned int vertexPosBuffer;
         unsigned int textBuffer;
         unsigned int indexBuffer;
+        void init(void);
         void genVertexArray(void);
         void bindVertexArray(void);
         void genBuffer(unsigned int* buffer);

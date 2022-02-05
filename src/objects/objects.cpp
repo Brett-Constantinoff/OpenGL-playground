@@ -56,32 +56,118 @@ Cube::Cube(std::string name, glm::vec3 color, const char* texture){
         16, 17, 18,     17, 18, 19,  
         20, 21, 22,     21, 22, 23
     };
-
-    this->model = glm::mat4(1.0f);
     
-    this->genVertexArray();
-    this->bindVertexArray();
+    this->init();
+};
 
-    //set buffers
-    this->genBuffer(&this->vertexPosBuffer);
-    this->bindBuffer(this->vertexPosBuffer);
-    this->setBufferData(this->vertexPositions.size(), this->vertexPositions);
-    
-    this->genBuffer(&this->indexBuffer);
-    this->bindIndexBuffer(this->indexBuffer);
-    this->setIndexBufferData(this->triangles.size(), this->triangles);
+Pyramid::Pyramid(std::string name, glm::vec3 color, const char* texture){
+    this->name = name;
+    this->color = color;
+    this->texture = texture;
+    this->vertexPositions = {
+        0.0f, 0.0f, 0.0f,   0.0f, 0.0f, -1.0f,      0.0f, 0.0f,
+        1.0f, 0.0f, 0.0f,   0.0f, 0.0f, -1.0f,      1.0f, 0.0f,
+        0.5f, 1.0f, 0.5f,   0.0f, 0.0f, -1.0f,      0.5f, 1.0f,
 
-    this->setTexture();
+        1.0f, 0.0f, 0.0f,   1.0f, 0.0f, 0.0f,       0.0f, 0.0f,
+        1.0f, 0.0f, 1.0f,   1.0f, 0.0f, 0.0f,       1.0f, 0.0f,
+        0.5f, 1.0f, 0.5f,   1.0f, 0.0f, 0.0f,       0.5f, 1.0f,
 
-    //set vertex positions
-    this->setAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
-    this->enableAttribPointer(0);
+        0.0f, 0.0f, 0.0f,   -1.0f, 0.0f, 0.0f,      0.0f, 0.0f, 
+        0.5f, 1.0f, 0.5f,   -1.0f, 0.0f, 0.0f,      1.0f, 0.0f,
+        0.0f, 0.0f, 1.0f,   -1.0f, 0.0f, 0.0f,      0.5f, 1.0f,
 
-    //set normals
-    this->setAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
-    this->enableAttribPointer(1);
+        1.0f, 0.0f, 1.0f,   0.0f, 0.0f, -1.0f,      0.0f, 0.0f,
+        0.0f, 0.0f, 1.0f,   0.0f, 0.0f, -1.0f,      1.0f, 0.0f,
+        0.5f, 1.0f, 0.5f,   0.0f, 0.0f, -1.0f,      0.5f, 1.0f,
 
-    //set uv coordinates
-    this->setAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
-    this->enableAttribPointer(2);
+        0.0f, 0.0f, 0.0f,   0.0f, -1.0f, 0.0f,      0.0f, 0.0f,
+        0.0f, 0.0f, 1.0f,   0.0f, -1.0f, 0.0f,      1.0f, 0.0f,
+        1.0f, 0.0f, 0.0f,   0.0f, -1.0f, 0.0f,      0.5f, 1.0f, 
+
+        0.0f, 0.0f, 1.0f,   0.0f, -1.0f, 0.0f,      0.0f, 0.0f, 
+        1.0f, 0.0f, 1.0f,   0.0f, -1.0f, 0.0f,      1.0f, 0.0f,
+        1.0f, 0.0f, 0.0f,   0.0f, -1.0f, 0.0f,      0.5f, 1.0f,
+    };
+
+    this->triangles = {
+        0, 1, 2, 
+        3, 4, 5, 
+        6, 7, 8, 
+        9, 10, 11, 
+        12, 13, 14, 
+        15, 16, 17
+    };
+    this->init();
+};
+
+Octahedron::Octahedron(std::string name, glm::vec3 color, const char* texture){
+    this->name = name;
+    this->color = color;
+    this->texture = texture;
+    this->vertexPositions = {
+        0.0f, 0.0f, 0.0f,   0.0f, 0.0f, -1.0f,      0.0f, 0.0f,
+        1.0f, 0.0f, 0.0f,   0.0f, 0.0f, -1.0f,      1.0f, 0.0f,
+        0.5f, 1.0f, 0.5f,   0.0f, 0.0f, -1.0f,      0.5f, 1.0f,
+
+        1.0f, 0.0f, 0.0f,   1.0f, 0.0f, 0.0f,       0.0f, 0.0f,
+        1.0f, 0.0f, 1.0f,   1.0f, 0.0f, 0.0f,       1.0f, 0.0f,
+        0.5f, 1.0f, 0.5f,   1.0f, 0.0f, 0.0f,       0.5f, 1.0f,
+
+        0.0f, 0.0f, 0.0f,   -1.0f, 0.0f, 0.0f,      0.0f, 0.0f, 
+        0.5f, 1.0f, 0.5f,   -1.0f, 0.0f, 0.0f,      1.0f, 0.0f,
+        0.0f, 0.0f, 1.0f,   -1.0f, 0.0f, 0.0f,      0.5f, 1.0f,
+
+        1.0f, 0.0f, 1.0f,   0.0f, 0.0f, -1.0f,      0.0f, 0.0f,
+        0.0f, 0.0f, 1.0f,   0.0f, 0.0f, -1.0f,      1.0f, 0.0f,
+        0.5f, 1.0f, 0.5f,   0.0f, 0.0f, -1.0f,      0.5f, 1.0f,
+
+        0.0f, 0.0f, 0.0f,   0.0f, -1.0f, 0.0f,      0.0f, 0.0f,
+        0.0f, 0.0f, 1.0f,   0.0f, -1.0f, 0.0f,      1.0f, 0.0f,
+        1.0f, 0.0f, 0.0f,   0.0f, -1.0f, 0.0f,      0.5f, 1.0f, 
+
+        0.0f, 0.0f, 1.0f,   0.0f, -1.0f, 0.0f,      0.0f, 0.0f, 
+        1.0f, 0.0f, 1.0f,   0.0f, -1.0f, 0.0f,      1.0f, 0.0f,
+        1.0f, 0.0f, 0.0f,   0.0f, -1.0f, 0.0f,      0.5f, 1.0f,
+
+        0.0f, 0.0f, 0.0f,   0.0f, 0.0f, -1.0f,      0.0f, 0.0f,
+        1.0f, 0.0f, 0.0f,   0.0f, 0.0f, -1.0f,      1.0f, 0.0f,
+        0.5f, -1.0f, 0.5f,  0.0f, 0.0f, -1.0f,      0.5f, 1.0f,
+
+        1.0f, 0.0f, 0.0f,   1.0f, 0.0f, 0.0f,       0.0f, 0.0f,
+        1.0f, 0.0f, 1.0f,   1.0f, 0.0f, 0.0f,       1.0f, 0.0f,
+        0.5f, -1.0f, 0.5f,  1.0f, 0.0f, 0.0f,       0.5f, 1.0f,
+
+        0.0f, 0.0f, 0.0f,   -1.0f, 0.0f, 0.0f,      0.0f, 0.0f, 
+        0.5f, -1.0f, 0.5f,  -1.0f, 0.0f, 0.0f,      1.0f, 0.0f,
+        0.0f, 0.0f, 1.0f,   -1.0f, 0.0f, 0.0f,      0.5f, 1.0f,
+
+        1.0f, 0.0f, 1.0f,   0.0f, 0.0f, -1.0f,      0.0f, 0.0f,
+        0.0f, 0.0f, 1.0f,   0.0f, 0.0f, -1.0f,      1.0f, 0.0f,
+        0.5f, -1.0f, 0.5f,  0.0f, 0.0f, -1.0f,      0.5f, 1.0f,
+
+        0.0f, 0.0f, 0.0f,   0.0f, -1.0f, 0.0f,      0.0f, 0.0f,
+        0.0f, 0.0f, 1.0f,   0.0f, -1.0f, 0.0f,      1.0f, 0.0f,
+        1.0f, 0.0f, 0.0f,   0.0f, -1.0f, 0.0f,      0.5f, 1.0f, 
+
+        0.0f, 0.0f, 1.0f,   0.0f, -1.0f, 0.0f,      0.0f, 0.0f, 
+        1.0f, 0.0f, 1.0f,   0.0f, -1.0f, 0.0f,      1.0f, 0.0f,
+        1.0f, 0.0f, 0.0f,   0.0f, -1.0f, 0.0f,      0.5f, 1.0f,
+    };
+    this->triangles = {
+       0, 1, 2, 
+       3, 4, 5, 
+       6, 7, 8,
+       9, 10, 11,
+       12, 13, 14,
+       15, 16, 17,
+       18, 19, 20,
+       21, 22, 23, 
+       24, 25, 26, 
+       27, 28, 29, 
+       30, 31, 32, 
+       33, 34, 35,
+    };
+
+    this->init();
 };

@@ -7,6 +7,35 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+
+void SceneObject::init(void){
+    this->genVertexArray();
+    this->bindVertexArray();
+
+    //set buffers
+    this->genBuffer(&this->vertexPosBuffer);
+    this->bindBuffer(this->vertexPosBuffer);
+    this->setBufferData(this->vertexPositions.size(), this->vertexPositions);
+    
+    this->genBuffer(&this->indexBuffer);
+    this->bindIndexBuffer(this->indexBuffer);
+    this->setIndexBufferData(this->triangles.size(), this->triangles);
+
+    this->setTexture();
+
+    //set vertex positions
+    this->setAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
+    this->enableAttribPointer(0);
+
+    //set normals
+    this->setAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
+    this->enableAttribPointer(1);
+
+    //set uv coordinates
+    this->setAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
+    this->enableAttribPointer(2);
+};
+
 void SceneObject::draw(void){
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, this->textBuffer);
