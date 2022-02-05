@@ -11,16 +11,15 @@
 
 class Window{
     private:
-        int width;
-        int height;
-        const char* title;
         void makeCurrentContext(void);
     
     public:
         GLFWwindow* win;
-        Window(int width, int height, std::string title);
-        int getWidth(void);
-        int getHeight(void);
+        int width;
+        int height;
+        const char* title;
+        glm::vec3 color;
+        Window(int width, int height, std::string title, glm::vec3 color);
         void setViewPort(int x, int y);
         bool isOpen(void);
         void clearColor(float r, float g, float b, float alpha);

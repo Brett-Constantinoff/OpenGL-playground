@@ -9,10 +9,11 @@
 #include "../../libraries/imgui/imgui_impl_glfw.h"
 #include "../../libraries/imgui/imgui_impl_opengl3.h"
 
-Window::Window(int width, int height, std::string title){
+Window::Window(int width, int height, std::string title, glm::vec3 color){
     this->width = width;
     this->height = height;
     this->title = title.c_str(); 
+    this->color = color;
 
     /* INIT GLFW */
     glfwInit();
@@ -46,14 +47,6 @@ Window::Window(int width, int height, std::string title){
     ImGui::StyleColorsDark();
     ImGui_ImplGlfw_InitForOpenGL(this->win, true);
     ImGui_ImplOpenGL3_Init("#version 150");
-};
-
-int Window::getHeight(void){
-    return this->height;
-};
-
-int Window::getWidth(void){
-    return this->width;
 };
 
 void Window::makeCurrentContext(void){
