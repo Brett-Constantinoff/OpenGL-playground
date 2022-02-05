@@ -4,11 +4,11 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-void Scene::add(Cube c){
-    this->objects.push_back(c);
+void Scene::add(SceneObject object){
+    this->objects.push_back(object);
 };
 
-std::vector<Cube> Scene::getObjects(void){
+std::vector<SceneObject> Scene::getObjects(void){
     return this->objects;
 };
 
@@ -18,7 +18,7 @@ void Scene::setView(Window *win, Camera *cam){
 };
 
 void Scene::deleteScene(void){
-    for(Cube c : this->objects){
-        c.deleteRes();
+    for(SceneObject object : this->objects){
+        object.deleteRes();
     }
 };

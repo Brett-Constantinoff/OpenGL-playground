@@ -5,22 +5,22 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
-#include "../objects/objects.h"
+#include "../objects/SceneObject.h"
 #include "../window/window.h"
 #include "../camera/camera.h"
 
 
 class Scene{
     private:
-        std::vector<Cube> objects;
+        std::vector<SceneObject> objects;
     
     public:
         glm::mat4 projection;
         glm::mat4 view;
-        void add(Cube c);
+        void add(SceneObject shape);
         void setView(Window *win, Camera *cam);
         void deleteScene(void);
-        std::vector<Cube> getObjects(void);
+        std::vector<SceneObject> getObjects(void);
 
 };
 

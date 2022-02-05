@@ -62,13 +62,13 @@ int main(){
        shader.setMat4("view", scene.view);
     
        for (int i = 0; i < CUBES; i++){
-           for(Cube c : scene.getObjects()){
-               c.move(position.x, position.y, position.z);
-               c.updateNormalMat();
-               shader.setVec3("diffuseVal", c.color);
-               shader.setMat4("model", c.model);
-               shader.setMat4("normalMatrix", c.normalMat);
-               c.draw();
+           for(SceneObject object : scene.getObjects()){
+               object.move(position.x, position.y, position.z);
+               object.updateNormalMat();
+               shader.setVec3("diffuseVal", object.color);
+               shader.setMat4("model", object.model);
+               shader.setMat4("normalMatrix", object.normalMat);
+               object.draw();
                position.x += 2.0f;
            }
            position.z += 2.0f;

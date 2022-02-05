@@ -7,37 +7,22 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+#include "SceneObject.h"
 
-class Cube{
-    private:
-        std::vector<float> vertexPositions;
-        std::vector<int> triangles;
-        unsigned int vao;
-        unsigned int vertexPosBuffer;
-        unsigned int textBuffer;
-        unsigned int indexBuffer;
-        void genVertexArray(void);
-        void bindVertexArray(void);
-        void genBuffer(unsigned int* buffer);
-        void bindIndexBuffer(unsigned int buffer);
-        void bindBuffer(unsigned int buffer);
-        void setBufferData(size_t size, std::vector<float> data);
-        void setIndexBufferData(size_t, std::vector<int> data);
-        void setAttribPointer(unsigned int index, int size, int type, bool normalized, int stride, const void* offset);
-        void enableAttribPointer(unsigned int i);
-        void setTexture(void);
+
+class Cube : public SceneObject{
     public:
-        Cube(std::string name, glm::vec3 color, const char* texture);
-        glm::vec3 color;
-        std::string name;
-        const char* texture;
-        glm::mat4 model;
-        glm::mat4 normalMat;
-        void draw(void);
-        void move(float x, float y, float z);
-        void updateNormalMat(void);
-        void translate(glm::vec3 vec);
-        void deleteRes(void);
+        Cube(std::string name, glm::vec3 color, const char* texture);  
+};
+
+class Pyramid : public SceneObject{
+    public:
+        Pyramid(std::string name, glm::vec3 color, const char* texture);
+};
+
+class Octahedron : public SceneObject{
+    public:
+        Octahedron(std::string name, glm::vec3 color, const char* texture);
 };
 
 #endif
