@@ -4,7 +4,7 @@ LDFLAGS=-lglfw -lglew -framework OpenGL
 
 all: main
 
-main: main.o shader.o scene.o window.o objects.o shape.o camera.o libraries.o
+main: main.o shader.o scene.o window.o objects.o camera.o libraries.o
 	$(CC) *.o -o main $(LDFLAGS)
 
 main.o: *.cpp
